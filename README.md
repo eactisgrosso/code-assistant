@@ -8,6 +8,11 @@ It requires the OPENAI_API_KEY environment variable to be set, which you can pro
 echo 'OPENAI_API_KEY="..."' > .env
 ```
 
+and installing the packages:  
+```bash
+pip install -r requirements.txt
+```
+
 
 ## Usage
 ```bash

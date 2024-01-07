@@ -26,5 +26,5 @@ Where the first argument is the command, and -d is the root directory where the 
 
 Another example, with the 'Retriever' strategy:
 ```bash
-python script.py "Update api.ts to consume this api 'https://example.com'" -d "../project" -t "Retriever"
+python script.py "Add an authentication method to api.ts" -d "../project" -t "Retriever"
 ```

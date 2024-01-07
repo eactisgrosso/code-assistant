@@ -15,7 +15,6 @@ from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain_community.agent_toolkits import FileManagementToolkit
 from langchain.tools import tool
 
-
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
 
@@ -45,7 +44,7 @@ def find_file_paths(root_directory: str, file_names: []):
     return file_paths
 
 file_pattern = r'\b\w+\.\w+\b'
-def create_retriever_strategy_tool(command: str, root_dir: str):
+def create_rag_tool(command: str, root_dir: str):
     file_names = re.findall(file_pattern, command)
     file_paths = find_file_paths(root_dir, file_names)
 
@@ -81,7 +80,7 @@ def create_retriever_strategy_tool(command: str, root_dir: str):
     return [retriever_tool, write_code]
 
 
-def process_command(command: str, root_dir: str, tool_strategy: Literal['FileSystem', 'Retriever'] = 'FileSystem'):
+def process_command(command: str, root_dir: str, tool_strategy: Literal['FileSystem', 'RAG'] = 'FileSystem'):
     tools: None
     search_tool = ""
     write_tool = ""
@@ -93,8 +92,8 @@ def process_command(command: str, root_dir: str, tool_strategy: Literal['FileSys
         ).get_tools()
         search_tool = "'list_directory', 'read_file'"
         write_tool = "'write_file', automatically, without asking for confirmation."
-    elif tool_strategy == 'Retriever':
-        tools = create_retriever_strategy_tool(command, root_dir)
+    elif tool_strategy == 'RAG':
+        tools = create_rag_tool(command, root_dir)
         search_tool = "'search_code'"
         write_tool = "'write_code', by only providing the new code."
     else:
@@ -122,7 +121,7 @@ def main():
     parser = argparse.ArgumentParser(prog="CodeAssistant")
     parser.add_argument("cmd", help="Command specifying which code to generate and where to write it.", type=str)
     parser.add_argument("-d", "--dir", help="Directory where the files referred in the command are located.", required=False, default="/", type=str)
-    parser.add_argument("-t", "--tool", help="The Langchain toolset to use in the agent.", required=False, choices=["FileSystem","Retriever"], default="FileSystem", type=str)
+    parser.add_argument("-t", "--tool", help="The Langchain toolset to use in the agent.", required=False, choices=["FileSystem","RAG"], default="FileSystem", type=str)
     args = parser.parse_args()
    
     process_command(args.cmd, args.dir, args.tool)

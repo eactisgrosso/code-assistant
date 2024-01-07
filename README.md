@@ -1,5 +1,5 @@
 # Code assistant
-A python script that automates code modifications in various files using LangChain Agents and OpenAI's API.
+A python script that generates code and writes it to local files, using LangChain Agents and OpenAI's API.
 
 It supports two alternative tool strategies: 
 - FileSystem: it gives control over the file system for the script to change and insert code in files.

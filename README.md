@@ -26,7 +26,7 @@ https://github.com/eactisgrosso/code-assistant/assets/2279003/878e5933-f886-43c5
 
 Where the first argument is the command, and -d is the root directory where the files referred in the command are located.
 
-Another example, with 'RAG':
+Another example, now using 'RAG', which should be cheaper in terms of token consumption, and faster, but it won't update files automatically:
 ```bash
 python script.py "Update api.py to add an endpoint '/delete_item'" -d "../project" -t RAG
 ```

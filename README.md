@@ -22,9 +22,14 @@ pip install -r requirements.txt
 python script.py "Update api.py to add an endpoint '/delete_item'" -d "../project"
 ```
 
+
+https://github.com/eactisgrosso/code-assistant/assets/2279003/878e5933-f886-43c5-b936-8e4efc9aad8e
+
+
 Where the first argument is the command, and -d is the root directory where the files referred in the command are located.
 
 Another example, with 'RAG':
 ```bash
 python script.py "Add an authentication method to api.ts" -d "../project" -t "RAG"
 ```
+
